@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — E-commerce Analyst & Amazon Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --surface2: #f0ede6;
+  --surface3: #e8e4db;
+  --border: #e2ddd4;
+  --border2: #d4cec4;
+  --accent: #ff9900;
+  --accent-dim: rgba(255,153,0,0.12);
+  --accent-dim2: rgba(255,153,0,0.06);
+  --amber: #c45500;
+  --amber-dim: rgba(196,85,0,0.10);
+  --text: #0f1111;
+  --text2: #565959;
+  --text3: #999c9c;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  padding: 16px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: rgba(247,245,240,0.95);
+  backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo-icon {
+  width: 28px; height: 28px;
+  background: var(--accent);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links a { color: var(--text2); text-decoration: none; font-size: 13px; transition: color 0.2s; font-family: var(--mono); font-size: 12px; }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+  background: var(--accent) !important;
+  color: #fff !important;
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  font-family: 'Instrument Sans', sans-serif !important;
+  font-size: 13px !important;
+  transition: opacity 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.85 !important; }
+
+/* TICKER */
+.ticker-wrap {
+  border-bottom: 1px solid var(--border);
+  background: #fff8ee;
+  overflow: hidden;
+  padding: 9px 0;
+}
+.ticker {
+  display: flex;
+  gap: 0;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 40px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  border-right: 1px solid var(--border);
+}
+.ticker-item .val { color: var(--accent); font-weight: 500; }
+.ticker-item .val.neg { color: #ff5252; }
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* HERO */
+.hero {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 90px 60px 80px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(0,200,83,0.25);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--mono);
+  padding: 5px 14px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.5s ease both;
+  letter-spacing: 0.05em;
+}
+
+.dot-green {
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s 0.1s ease both;
+  color: var(--text);
+}
+
+.hero h1 em { font-style: normal; color: var(--accent); }
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--text2);
+  max-width: 460px;
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 36px;
+  animation: fadeUp 0.5s 0.2s ease both;
+}
+
+.hero-btns { display: flex; gap: 12px; animation: fadeUp 0.5s 0.3s ease both; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.85; }
+.btn-secondary {
+  background: transparent;
+  color: var(--text2);
+  padding: 12px 24px;
+  border-radius: 7px;
+  font-size: 13px;
+  text-decoration: none;
+  border: 1px solid var(--border2);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondary:hover { border-color: var(--text2); color: var(--text); }
+
+/* HERO STATS CARD */
+.hero-stats {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  animation: fadeUp 0.5s 0.2s ease both;
+}
+
+.stats-header {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-live { color: var(--accent); font-size: 9px; display: flex; align-items: center; gap: 5px; }
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-label { font-size: 12px; color: var(--text2); font-family: var(--mono); }
+.stat-value { font-size: 13px; font-weight: 600; font-family: var(--mono); color: var(--text); }
+.stat-value.green { color: var(--accent); }
+.stat-value.amber { color: var(--amber); }
+
+.stat-bar-wrap { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+.stat-bar-label { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-bottom: 8px; display: flex; justify-content: space-between; }
+.stat-bar-bg { background: var(--surface3); border-radius: 3px; height: 5px; overflow: hidden; }
+.stat-bar-fill { height: 100%; border-radius: 3px; background: var(--accent); animation: barGrow 1.2s 0.5s ease both; transform-origin: left; }
+@keyframes barGrow { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+/* DIVIDER */
+.divider { max-width: 1000px; margin: 0 auto; padding: 0 60px; border-top: 1px solid var(--border); }
+
+/* SECTIONS */
+.section { max-width: 1000px; margin: 0 auto; padding: 72px 60px; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.section-sub { color: var(--text2); font-size: 14px; font-weight: 300; margin-bottom: 48px; }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.about-body { font-size: 15px; color: var(--text2); line-height: 1.85; font-weight: 300; }
+.about-body p + p { margin-top: 16px; }
+.about-body strong { color: var(--text); font-weight: 500; }
+.about-facts { display: flex; flex-direction: column; gap: 8px; }
+
+.fact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+.fact-label { font-size: 12px; color: var(--text2); font-family: var(--mono); }
+.fact-value { font-size: 12px; font-weight: 500; color: var(--text); font-family: var(--mono); }
+
+/* METRICS STRIP */
+.metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 56px;
+}
+.metric-box {
+  background: var(--surface);
+  padding: 24px 28px;
+}
+.metric-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.metric-label { font-size: 12px; color: var(--text2); font-family: var(--mono); }
+
+/* TECH */
+.tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+.tech-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+.tech-card:hover { border-color: var(--accent); background: var(--accent-dim2); }
+
+.tech-icon {
+  width: 36px; height: 36px;
+  border-radius: 7px;
+  margin-bottom: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--mono);
+}
+.tech-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 5px; color: var(--text); }
+.tech-desc { font-size: 12px; color: var(--text2); font-weight: 300; line-height: 1.6; }
+
+/* EXP */
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
+}
+.exp-role { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+.exp-company { font-size: 13px; color: var(--accent); font-weight: 500; margin-bottom: 16px; font-family: var(--mono); }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.exp-bullets li { font-size: 13px; color: var(--text2); font-weight: 300; padding-left: 18px; position: relative; line-height: 1.6; }
+.exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 3px; }
+.exp-date { font-size: 11px; color: var(--text3); white-space: nowrap; background: var(--surface2); border: 1px solid var(--border); padding: 4px 12px; border-radius: 4px; font-family: var(--mono); }
+
+/* PROJECTS */
+.projects-grid { display: flex; flex-direction: column; gap: 10px; }
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 26px 30px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.project-card:hover::before { opacity: 1; }
+.project-card:hover { border-color: rgba(0,200,83,0.3); background: var(--accent-dim2); }
+.project-card.amber::before { background: var(--amber); }
+.project-card.amber:hover { border-color: rgba(255,152,0,0.3); background: var(--amber-dim); }
+
+.project-num { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--text3); letter-spacing: 0.1em; margin-bottom: 8px; }
+.project-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+.project-desc { font-size: 13px; color: var(--text2); font-weight: 300; line-height: 1.6; max-width: 540px; margin-bottom: 14px; }
+.project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.p-tag {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  color: var(--text3);
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 3px;
+  font-family: var(--mono);
+}
+
+.project-arrow {
+  width: 38px; height: 38px;
+  border-radius: 7px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text3);
+  font-size: 16px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.project-card:hover .project-arrow { background: var(--accent-dim); color: var(--accent); border-color: rgba(0,200,83,0.3); }
+.project-card.amber:hover .project-arrow { background: var(--amber-dim); color: var(--amber); border-color: rgba(255,152,0,0.3); }
+
+/* CONTACT */
+.contact-card {
+  background: #0f1111;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 300px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.contact-card .section-label { justify-content: center; display: flex; color: rgba(255,153,0,0.7); }
+.contact-card .section-title { color: #fff; margin-bottom: 12px; }
+.contact-sub { color: rgba(255,255,255,0.5); font-size: 15px; font-weight: 300; margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.contact-btns { display: flex; gap: 12px; justify-content: center; }
+.btn-green { background: var(--accent); color: #fff; padding: 13px 28px; border-radius: 7px; font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
+.btn-green:hover { opacity: 0.85; }
+.btn-outline { background: transparent; color: var(--text2); padding: 13px 28px; border-radius: 7px; font-size: 13px; text-decoration: none; border: 1px solid var(--border2); transition: border-color 0.2s, color 0.2s; }
+.btn-outline:hover { border-color: var(--text2); color: var(--text); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 22px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-left { font-size: 12px; color: var(--text3); font-family: var(--mono); }
+.footer-left span { color: var(--accent); }
+.footer-right { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal { opacity: 1; transform: none; transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.animate { opacity: 0; transform: translateY(16px); }
+.reveal.animate.visible { opacity: 1; transform: none; }
+
+@media (max-width: 720px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 48px 20px; }
+  .hero-stats { display: none; }
+  .section { padding: 48px 20px; }
+  .divider { padding: 0 20px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .tech-grid { grid-template-columns: 1fr 1fr; }
+  .metrics-strip { grid-template-columns: 1fr 1fr; }
+  .project-card { grid-template-columns: 1fr; }
+  .project-arrow { display: none; }
+  .exp-card { grid-template-columns: 1fr; }
+  .contact-card { padding: 32px 20px; }
+  .contact-btns { flex-direction: column; }
+  footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">YN</div>
+    Your<span style="color:var(--accent)">Name</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#tech">tools</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="mailto:your@email.com" class="nav-cta">Send email</a></li>
+  </ul>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">PRODUCTS SOURCED / DAY <span class="val">15–18</span></div>
+    <div class="ticker-item">ROI IDENTIFIED <span class="val">30%–93%</span></div>
+    <div class="ticker-item">DISTRIBUTOR LEADS / DAY <span class="val">15–20</span></div>
+    <div class="ticker-item">PROFIT PER UNIT <span class="val">$2–$3</span></div>
+    <div class="ticker-item">FBA FEE CALC <span class="val">ACTIVE</span></div>
+    <div class="ticker-item">TARIFF MODELLING <span class="val">LIVE</span></div>
+    <div class="ticker-item">LANDED COST ANALYSIS <span class="val">ACTIVE</span></div>
+    <div class="ticker-item">AUTOMATION TIME SAVED <span class="val">90%</span></div>
+    <!-- duplicate for loop -->
+    <div class="ticker-item">PRODUCTS SOURCED / DAY <span class="val">15–18</span></div>
+    <div class="ticker-item">ROI IDENTIFIED <span class="val">30%–93%</span></div>
+    <div class="ticker-item">DISTRIBUTOR LEADS / DAY <span class="val">15–20</span></div>
+    <div class="ticker-item">PROFIT PER UNIT <span class="val">$2–$3</span></div>
+    <div class="ticker-item">FBA FEE CALC <span class="val">ACTIVE</span></div>
+    <div class="ticker-item">TARIFF MODELLING <span class="val">LIVE</span></div>
+    <div class="ticker-item">LANDED COST ANALYSIS <span class="val">ACTIVE</span></div>
+    <div class="ticker-item">AUTOMATION TIME SAVED <span class="val">90%</span></div>
+  </div>
+</div>
+
+<section class="hero">
+  <div>
+    <div class="hero-badge">
+      <div class="dot-green"></div>
+      LET'S CONNECT
+    </div>
+    <h1>E-commerce Analyst<br>& <em>Amazon Specialist</em></h1>
+    <p class="hero-sub">I find profitable products, source smarter, and back every decision with data — from distributor research to full landed cost and ROI analysis.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View my work</a>
+      <a href="#contact" class="btn-secondary">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div style="width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;margin-bottom:16px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+      <img src="profile.jpg" alt="Profile photo" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\'font-family:Syne,sans-serif;font-size:64px;font-weight:800;color:var(--border2)\'>YN</span>')">
+    </div>
+    <div class="stats-header">
+      <span>ANALYST DASHBOARD</span>
+      <span class="stats-live"><div class="dot-green"></div> LIVE</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Products Sourced / Day</span>
+      <span class="stat-value green">15–18</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">ROI Identified</span>
+      <span class="stat-value green">30%–93%</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Distributor Leads / Day</span>
+      <span class="stat-value">15–20</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Profit per Unit</span>
+      <span class="stat-value amber">$2–$3</span>
+    </div>
+    <div class="stat-bar-wrap">
+      <div class="stat-bar-label">
+        <span>Win Rate (profitable finds)</span>
+        <span style="color:var(--accent)">78%</span>
+      </div>
+      <div class="stat-bar-bg">
+        <div class="stat-bar-fill" style="width:78%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section reveal" id="about">
+  <div class="section-label">About me</div>
+  <div class="section-title">Who I am</div>
+  <p class="section-sub">A little background on my work and approach.</p>
+
+  <div class="metrics-strip">
+    <div class="metric-box">
+      <div class="metric-num">15–18</div>
+      <div class="metric-label">products sourced / day</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-num">93%</div>
+      <div class="metric-label">max ROI identified</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-num">15–20</div>
+      <div class="metric-label">distributor leads / day</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-num">$2–$3</div>
+      <div class="metric-label">profit identified / unit</div>
+    </div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-body">
+      <p>I'm an <strong>e-commerce analyst and Amazon sourcing specialist</strong> who combines data-driven research with hands-on product knowledge. My work sits at the intersection of market research, financial analysis, and automation.</p>
+      <p>I don't rely on guesswork — every product I evaluate goes through a full cost analysis covering supplier pricing, landed costs, FBA fees, tariffs, and ROI before any sourcing decision is made.</p>
+      <p>On the technical side, I build automation tools in <strong>Python</strong> to speed up research workflows that would otherwise take hours to complete manually.</p>
+    </div>
+    <div class="about-facts">
+      <div class="fact-row">
+        <span class="fact-label">role</span>
+        <span class="fact-value">E-commerce Analyst</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-label">specialization</span>
+        <span class="fact-value">Amazon FBA Sourcing</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-label">focus</span>
+        <span class="fact-value">Online Arbitrage, Wholesale</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-label">builds</span>
+        <span class="fact-value">Automation tools & scripts</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section reveal" id="tech">
+  <div class="section-label">Tech & tools</div>
+  <div class="section-title">What I work with</div>
+  <p class="section-sub">Tools and platforms I use across product research, sourcing, and automation.</p>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#e8f0fb;color:#185fa5;">H10</div>
+      <div class="tech-name">Helium 10</div>
+      <div class="tech-desc">Primary tool for product research, keyword tracking, competitor analysis, and market validation on Amazon.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#fff4e0;color:#c45500;">KP</div>
+      <div class="tech-name">Keepa</div>
+      <div class="tech-desc">Amazon price history tracker — used to analyze BSR trends, price drops, and sales velocity before committing to a product.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#e8f0fb;color:#185fa5;">SS</div>
+      <div class="tech-name">SmartScout</div>
+      <div class="tech-desc">Brand and distributor discovery tool — helps identify wholesale opportunities and map out entire Amazon brand landscapes.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#eaf5e0;color:#3a7d0a;">JS</div>
+      <div class="tech-name">Jungle Scout</div>
+      <div class="tech-desc">Product demand research and sales estimation — used to validate market size before committing to a product.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#fff4e0;color:#ff9900;">RS</div>
+      <div class="tech-name">RevSeller</div>
+      <div class="tech-desc">Browser extension for quick profitability checks — instantly calculates ROI and net profit on any Amazon listing.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#f0eefb;color:#6b4fc4;">AT</div>
+      <div class="tech-name">Analyzer Tools</div>
+      <div class="tech-desc">Bulk product analysis across distributor and wholesale price lists to surface high-margin opportunities fast.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#eaf5e0;color:#3a7d0a;">Py</div>
+      <div class="tech-name">Python</div>
+      <div class="tech-desc">Used for building automation scripts — like the Distributor Finder that scrapes supplier data via APIs.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#eaf5e0;color:#3a7d0a;">GS</div>
+      <div class="tech-name">Google Sheets</div>
+      <div class="tech-desc">Dynamic financial modelling — landed cost, FBA fees, and ROI calculations that update automatically.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#e8f0fb;color:#185fa5;">GM</div>
+      <div class="tech-name">Google Maps API</div>
+      <div class="tech-desc">Powers location-based distributor searches — pulling wholesaler listings by keyword at scale.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon" style="background:#fff4e0;color:#c45500;">AMZ</div>
+      <div class="tech-name">Amazon Seller Central</div>
+      <div class="tech-desc">Day-to-day platform for managing listings, monitoring performance, and tracking FBA inventory and fees.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section reveal" id="experience">
+  <div class="section-label">Work experience</div>
+  <div class="section-title">Where I've worked</div>
+  <p class="section-sub">My professional background in e-commerce and Amazon sourcing.</p>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Product Researcher & Sourcing Manager</div>
+      <div class="exp-company">Company Name — Edit this</div>
+      <ul class="exp-bullets">
+        <li>Conducted large-scale product research across multiple Amazon categories to identify high-ROI opportunities.</li>
+        <li>Managed end-to-end supplier relationships — from identifying distributors and wholesalers to negotiating pricing.</li>
+        <li>Built financial analysis tools to evaluate landed cost, FBA fees, and profitability before any buying decision.</li>
+        <li>Automated distributor research workflows using Python, reducing manual research time by over 90%.</li>
+      </ul>
+    </div>
+    <div class="exp-date">2022 — 2024</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section reveal" id="projects">
+  <div class="section-label">Projects</div>
+  <div class="section-title">My work</div>
+  <p class="section-sub">Case studies showing how I approach research and sourcing problems.</p>
+  <div class="projects-grid">
+    <a class="project-card" href="distributor-finder.html">
+      <div>
+        <div class="project-num">01 — AUTOMATION</div>
+        <div class="project-title">Distributor Finder — Automated Sourcing Tool</div>
+        <div class="project-desc">A Python-powered script that scrapes hundreds of distributors and wholesalers using Google Maps and Oxylabs APIs — replacing hours of manual sourcing with a single run.</div>
+        <div class="project-tags">
+          <span class="p-tag">Python</span>
+          <span class="p-tag">Google Maps API</span>
+          <span class="p-tag">Oxylabs</span>
+          <span class="p-tag">Pandas</span>
+          <span class="p-tag">Automation</span>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </a>
+    <a class="project-card amber" href="landed-cost.html">
+      <div>
+        <div class="project-num">02 — FINANCIAL ANALYSIS</div>
+        <div class="project-title">Landed Cost, Profit & ROI Analysis</div>
+        <div class="project-desc">A dynamic spreadsheet that calculates the true cost of every product before a buying decision — covering supplier pricing, shipping, tariffs, FBA fees, and referral fees.</div>
+        <div class="project-tags">
+          <span class="p-tag">Google Sheets</span>
+          <span class="p-tag">Landed cost</span>
+          <span class="p-tag">FBA fees</span>
+          <span class="p-tag">Tariff modelling</span>
+          <span class="p-tag">ROI</span>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </a>
+    <a class="project-card" href="#">
+      <div>
+        <div class="project-num">03 — PRODUCT RESEARCH</div>
+        <div class="project-title">Large Dataset Product Research</div>
+        <div class="project-desc">Add your description here — what was the project, what did you do, and what were the results?</div>
+        <div class="project-tags">
+          <span class="p-tag">Add tag</span>
+          <span class="p-tag">Add tag</span>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section reveal" id="contact">
+  <div class="contact-card">
+    <div class="section-label">Contact</div>
+    <div class="section-title">Let's work together</div>
+    <p class="contact-sub">Looking for an Amazon specialist who combines research, sourcing, and data automation? Let's talk.</p>
+    <div class="contact-btns">
+      <a href="mailto:your@email.com" class="btn-green">Send me an email</a>
+      <a href="https://linkedin.com" class="btn-outline">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">Built by <span>Your Name</span> · Hosted on GitHub Pages</div>
+  <div class="footer-right">yourname.github.io</div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  els.forEach(el => el.classList.add('animate'));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

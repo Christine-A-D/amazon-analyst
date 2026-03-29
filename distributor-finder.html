@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distributor Finder — Your Name</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --surface2: #f0ede6;
+  --surface3: #e8e4db;
+  --border: #e2ddd4;
+  --border2: #d4cec4;
+  --accent: #ff9900;
+  --accent-dim: rgba(255,153,0,0.12);
+  --accent-dim2: rgba(255,153,0,0.06);
+  --amber: #c45500;
+  --text: #0f1111;
+  --text2: #565959;
+  --text3: #999c9c;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Instrument Sans', sans-serif; font-size: 16px; line-height: 1.7; }
+
+/* NAV */
+nav {
+  padding: 16px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: rgba(247,245,240,0.95);
+  backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-icon {
+  width: 28px; height: 28px;
+  background: var(--accent);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: #fff;
+}
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--accent); }
+
+/* HERO */
+.project-hero {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 72px 60px 56px;
+}
+.project-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s ease both;
+}
+.project-desc {
+  font-size: 16px;
+  color: var(--text2);
+  font-weight: 300;
+  max-width: 580px;
+  line-height: 1.8;
+  margin-bottom: 36px;
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+.project-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.5s 0.2s ease both;
+}
+.p-tag {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-family: var(--mono);
+}
+
+/* STATS ROW */
+.stats-row {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 60px 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.stat-box {
+  background: var(--surface);
+  padding: 24px 28px;
+}
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.stat-label { font-size: 12px; color: var(--text2); font-family: var(--mono); }
+
+/* SECTIONS */
+.content { max-width: 860px; margin: 0 auto; padding: 0 60px 80px; }
+
+.section-block { margin-bottom: 56px; }
+.block-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.block-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.block-body {
+  font-size: 15px;
+  color: var(--text2);
+  font-weight: 300;
+  line-height: 1.85;
+}
+.block-body p + p { margin-top: 14px; }
+.block-body strong { color: var(--text); font-weight: 500; }
+
+/* PROCESS STEPS */
+.steps { display: flex; flex-direction: column; gap: 0; margin-top: 24px; }
+.step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(255,153,0,0.25);
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.step-desc { font-size: 14px; color: var(--text2); font-weight: 300; line-height: 1.7; }
+
+/* SCREENSHOT */
+.screenshot-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+.screenshot-bar {
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.screenshot-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--surface2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.screenshot-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.screenshot-caption {
+  padding: 12px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  border-top: 1px solid var(--border);
+}
+
+/* RESULTS */
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent);
+}
+.result-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.result-label { font-size: 13px; color: var(--text2); font-family: var(--mono); }
+
+/* DIVIDER */
+.divider { border-top: 1px solid var(--border); margin-bottom: 56px; }
+
+/* FOOTER NAV */
+.foot-nav {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 60px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.foot-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text2);
+  transition: color 0.2s;
+}
+.foot-link:hover { color: var(--accent); }
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 22px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-left { font-size: 12px; color: var(--text3); font-family: var(--mono); }
+.footer-left span { color: var(--accent); }
+.footer-right { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal { opacity: 1; transform: none; transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.animate { opacity: 0; transform: translateY(16px); }
+.reveal.animate.visible { opacity: 1; transform: none; }
+
+@media (max-width: 720px) {
+  nav { padding: 14px 20px; }
+  .project-hero { padding: 48px 20px 36px; }
+  .stats-row { grid-template-columns: 1fr 1fr; margin: 0 20px; padding: 0; }
+  .content { padding: 0 20px 60px; }
+  .results-grid { grid-template-columns: 1fr; }
+  .foot-nav { padding: 0 20px 48px; }
+  footer { padding: 20px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">YN</div>
+    Your<span style="color:var(--accent)">Name</span>
+  </a>
+  <a class="nav-back" href="index.html">← Back to portfolio</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="project-label">01 — Automation</div>
+  <h1 class="project-title">Distributor Finder —<br>Automated Sourcing Tool</h1>
+  <p class="project-desc">A Python-powered script that scrapes hundreds of distributors and wholesalers using Google Maps and Oxylabs APIs — replacing hours of manual sourcing with a single run.</p>
+  <div class="project-tags">
+    <span class="p-tag">Python</span>
+    <span class="p-tag">Google Maps API</span>
+    <span class="p-tag">Oxylabs</span>
+    <span class="p-tag">Pandas</span>
+    <span class="p-tag">Automation</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div style="max-width:860px;margin:0 auto;padding:0 60px 48px;">
+  <div class="stats-row" style="margin:0;padding:0;">
+    <div class="stat-box">
+      <div class="stat-num">800+</div>
+      <div class="stat-label">leads generated</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">90%</div>
+      <div class="stat-label">time saved vs manual</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">1 run</div>
+      <div class="stat-label">replaces hours of work</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- OVERVIEW -->
+  <div class="section-block reveal">
+    <div class="block-label">Overview</div>
+    <div class="block-title">The problem it solves</div>
+    <div class="block-body">
+      <p>Finding legitimate distributors and wholesalers for Amazon sourcing is one of the most time-consuming parts of the job. Manually searching Google, visiting websites, and recording contact details can take an entire day — for just a handful of leads.</p>
+      <p>This tool <strong>automates the entire process</strong>. By combining the Google Maps API with Oxylabs web scraping, it pulls distributor listings by keyword and location at scale — generating hundreds of qualified leads in a single run.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SCREENSHOT 1 -->
+  <div class="section-block reveal">
+    <div class="block-label">Screenshot</div>
+    <div class="block-title">Script output</div>
+    <div class="screenshot-wrap">
+      <div class="screenshot-bar">
+        <div class="dot" style="background:#ff5f57;"></div>
+        <div class="dot" style="background:#febc2e;"></div>
+        <div class="dot" style="background:#28c840;"></div>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-left:8px;">distributor_finder.py</span>
+      </div>
+      <div class="screenshot-placeholder">
+        <!-- Replace src with your actual screenshot -->
+        <img src="screenshot-output.png" alt="Script output" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;gap:10px;padding:60px 0;color:var(--text3);font-family:var(--mono);font-size:12px;\'><span style=\'font-size:32px;\'>📸</span><span>Replace with screenshot-output.png</span></div>'">
+      </div>
+      <div class="screenshot-caption">// Terminal output showing script running and leads being collected</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PROCESS -->
+  <div class="section-block reveal">
+    <div class="block-label">How it works</div>
+    <div class="block-title">Step-by-step process</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Keyword & location input</div>
+          <div class="step-desc">The script takes a product category keyword (e.g. "pet supplies distributor") and a target location. These are passed into the Google Maps API to search for matching businesses at scale.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Google Maps API scrape</div>
+          <div class="step-desc">Using the Places API, the script pulls business listings — name, address, phone number, website, and ratings — across multiple pages of results automatically.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Website scraping via Oxylabs</div>
+          <div class="step-desc">For each business found, Oxylabs proxies are used to visit the website and extract additional contact details — emails, product categories, and wholesale inquiry pages.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Data cleaning with Pandas</div>
+          <div class="step-desc">Raw results are processed with Pandas — duplicates removed, fields normalized, and leads scored by relevance. The final output is a clean, ready-to-use spreadsheet.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div>
+          <div class="step-title">Export to CSV / Google Sheets</div>
+          <div class="step-desc">The cleaned lead list is exported as a CSV and optionally pushed directly into a Google Sheet for easy review and outreach tracking.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SCREENSHOT 2 -->
+  <div class="section-block reveal">
+    <div class="block-label">Screenshot</div>
+    <div class="block-title">Sample output spreadsheet</div>
+    <div class="screenshot-wrap">
+      <div class="screenshot-bar">
+        <div class="dot" style="background:#ff5f57;"></div>
+        <div class="dot" style="background:#febc2e;"></div>
+        <div class="dot" style="background:#28c840;"></div>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-left:8px;">distributor_leads.csv</span>
+      </div>
+      <div class="screenshot-placeholder">
+        <img src="screenshot-spreadsheet.png" alt="Output spreadsheet" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;gap:10px;padding:60px 0;color:var(--text3);font-family:var(--mono);font-size:12px;\'><span style=\'font-size:32px;\'>📸</span><span>Replace with screenshot-spreadsheet.png</span></div>'">
+      </div>
+      <div class="screenshot-caption">// Sample CSV output — business name, contact, website, category, and lead score</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RESULTS -->
+  <div class="section-block reveal">
+    <div class="block-label">Results</div>
+    <div class="block-title">What it achieved</div>
+    <div class="block-body">
+      <p>Before this tool, finding and logging distributor contacts manually took <strong>4–6 hours per session</strong> and yielded maybe 20–30 leads. With the script running, the same effort produces hundreds of qualified leads in under an hour.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-val">800+</div>
+        <div class="result-label">distributor leads generated</div>
+      </div>
+      <div class="result-card">
+        <div class="result-val">90%</div>
+        <div class="result-label">reduction in research time</div>
+      </div>
+      <div class="result-card">
+        <div class="result-val">~1 hr</div>
+        <div class="result-label">vs 4–6 hrs manually</div>
+      </div>
+      <div class="result-card">
+        <div class="result-val">CSV</div>
+        <div class="result-label">clean export, ready to use</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER NAV -->
+<div class="foot-nav">
+  <a class="foot-link" href="index.html">← Back to portfolio</a>
+  <a class="foot-link" href="landed-cost.html">Next project →</a>
+</div>
+
+<footer>
+  <div class="footer-left">Built by <span>Your Name</span> · Hosted on GitHub Pages</div>
+  <div class="footer-right">yourname.github.io</div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  els.forEach(el => el.classList.add('animate'));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
