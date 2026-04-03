@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Large Dataset Product Research — Your Name</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --surface2: #f0ede6;
+  --surface3: #e8e4db;
+  --border: #e2ddd4;
+  --border2: #d4cec4;
+  --accent: #ff9900;
+  --accent-dim: rgba(255,153,0,0.12);
+  --accent-dim2: rgba(255,153,0,0.06);
+  --amber: #c45500;
+  --text: #0f1111;
+  --text2: #565959;
+  --text3: #999c9c;
+  --mono: 'Geist Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Geist', sans-serif; font-size: 16px; line-height: 1.7; }
+
+/* NAV */
+nav {
+  padding: 16px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: rgba(247,245,240,0.95);
+  backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo {
+  font-family: 'Geist', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-icon {
+  width: 28px; height: 28px;
+  background: var(--accent);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: #fff;
+}
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--accent); }
+
+/* HERO */
+.project-hero {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 72px 60px 56px;
+}
+.project-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.project-title {
+  font-family: 'Geist', sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s ease both;
+}
+.project-desc {
+  font-size: 16px;
+  color: var(--text2);
+  font-weight: 300;
+  max-width: 580px;
+  line-height: 1.8;
+  margin-bottom: 36px;
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+.project-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.5s 0.2s ease both;
+}
+.p-tag {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-family: var(--mono);
+}
+
+/* STATS ROW */
+.stats-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 60px 48px;
+}
+.stats-row {
+  display: flex;
+  flex-wrap: nowrap;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  gap: 1px;
+}
+.stat-box {
+  background: var(--surface);
+  padding: 24px 28px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.stat-num {
+  font-family: 'Geist', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.stat-label { font-size: 12px; color: var(--text2); font-family: var(--mono); }
+
+/* CONTENT */
+.content { max-width: 860px; margin: 0 auto; padding: 0 60px 80px; }
+.section-block { margin-bottom: 56px; }
+
+.block-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.block-title {
+  font-family: 'Geist', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.block-body {
+  font-size: 15px;
+  color: var(--text2);
+  font-weight: 300;
+  line-height: 1.85;
+}
+.block-body p + p { margin-top: 14px; }
+.block-body strong { color: var(--text); font-weight: 500; }
+
+/* METHOD BADGE */
+.method-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(255,153,0,0.25);
+  color: var(--amber);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--mono);
+  padding: 5px 14px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* SCREENSHOT */
+.screenshot-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+.screenshot-placeholder {
+  width: 100%;
+  background: var(--surface2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.screenshot-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.screenshot-caption {
+  padding: 12px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  border-top: 1px solid var(--border);
+}
+
+/* METHOD DIVIDER */
+.method-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 56px;
+}
+.method-divider-line { flex: 1; height: 1px; background: var(--border); }
+.method-divider-text {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* STEPS */
+.steps { display: flex; flex-direction: column; gap: 0; margin-top: 24px; }
+.step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  font-family: 'Geist', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(255,153,0,0.25);
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step-title {
+  font-family: 'Geist', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.step-desc { font-size: 14px; color: var(--text2); font-weight: 300; line-height: 1.7; }
+
+/* DIVIDER */
+.divider { border-top: 1px solid var(--border); margin-bottom: 56px; }
+
+/* FOOTER NAV */
+.foot-nav {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 60px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.foot-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text2);
+  transition: color 0.2s;
+}
+.foot-link:hover { color: var(--accent); }
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 22px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-left { font-size: 12px; color: var(--text3); font-family: var(--mono); }
+.footer-left span { color: var(--accent); }
+.footer-right { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 1; transform: none; transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.animate { opacity: 0; transform: translateY(16px); }
+.reveal.animate.visible { opacity: 1; transform: none; }
+
+@media (max-width: 720px) {
+  nav { padding: 14px 20px; }
+  .project-hero { padding: 48px 20px 36px; }
+  .stats-wrap { padding: 0 20px 36px; }
+  .content { padding: 0 20px 60px; }
+  .foot-nav { padding: 0 20px 48px; }
+  footer { padding: 20px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">CD</div>
+    Christine<span style="color:var(--accent)">Dawa</span>
+  </a>
+  <a class="nav-back" href="ecommerce-amazon.html">← Back to portfolio</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="project-label">03 — Product Research</div>
+  <h1 class="project-title">Large Dataset<br>Product Research</h1>
+  <p class="project-desc">Large-scale product research that processes thousands of data points, turning them into profitable brand and product opportunities. All of this was done using Amazon Seller Central, Analyzer Tools, SmartScout, and Python.</p>
+  <div class="project-tags">
+    <span class="p-tag">Seller Central</span>
+    <span class="p-tag">Python</span>
+    <span class="p-tag">SmartScout</span>
+    <span class="p-tag">Analyzer Tools</span>
+    <span class="p-tag">Product Research</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-wrap">
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num">2</div>
+      <div class="stat-label">research methods</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">1000+</div>
+      <div class="stat-label">products analysed</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">Auto</div>
+      <div class="stat-label">data processing</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- OVERVIEW -->
+  <div class="section-block reveal">
+    <div class="block-label">Overview</div>
+    <div class="block-title">Two ways to research at scale</div>
+    <div class="block-body">
+      <p>Downloading raw data directly from Seller Central and processing it with Python, and using Analyzer tools to analyze brands and identify wholesale opportunities.</p>
+      <p>Furthermore, SmartScout was also used to broaden the scope of the product leads.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- METHOD 1 -->
+  <div class="section-block reveal">
+    <div class="method-badge">Method 01 — Seller Central + Python</div>
+    <div class="block-title">Downloading & processing Seller Central data</div>
+    <div class="block-body">
+      <p>Top Search items presented through ASINS are not enough to identify products, as each should have its respective Amazon link and, if necessary, further calculation (if dealing across marketplaces).</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Download data from Seller Central</div>
+          <div class="step-desc">ASINs downloaded from Amazon Seller Central.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Process the data with Python</div>
+          <div class="step-desc">Python scripts make the process more efficient relative to excel, as Python can handle thousands of data efficiently.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Analyse the final output</div>
+          <div class="step-desc">After preprocessing the data, it will then be uploaded to Analyzer Tools to gather additional information or columns such as Amazon links, profit, revenue, sales per month, etc.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 1: Seller Central Download -->
+    <div class="screenshot-wrap" style="margin-top: 28px;">
+      <div class="screenshot-placeholder">
+        <img src="amazon_seller_data.png" alt="Seller Central data download" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--text3);font-family:var(--mono);font-size:12px;\'><span style=\'font-size:32px;\'>📸</span><span>Replace with screenshot-seller-central.png</span></div>'">
+      </div>
+      <div class="screenshot-caption">// Step 1 — Raw data export from Amazon Seller Central</div>
+    </div>
+
+    <!-- Step 2: Python Script -->
+    <div class="screenshot-wrap" style="margin-top: 20px;">
+      <div class="screenshot-placeholder">
+        <img src="exploration_seller_central_code.png" alt="Python processing script" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--text3);font-family:var(--mono);font-size:12px;\'><span style=\'font-size:32px;\'>📸</span><span>Replace with screenshot-python-script.png</span></div>'">
+      </div>
+      <div class="screenshot-caption">// Step 2 — Python script processing and cleaning the raw dataset</div>
+    </div>
+
+    <!-- Step 3: Final Output -->
+    <div class="screenshot-wrap" style="margin-top: 20px;">
+      <div class="screenshot-placeholder">
+        <img src="processed_data.png" alt="Final processed data" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--text3);font-family:var(--mono);font-size:12px;\'><span style=\'font-size:32px;\'>📸</span><span>Replace with screenshot-final-output.png</span></div>'">
+      </div>
+      <div class="screenshot-caption">// Step 3 — Final cleaned and filtered dataset ready for sourcing decisions</div>
+    </div>
+  </div>
+
+  <!-- METHOD DIVIDER -->
+  <div class="method-divider">
+    <div class="method-divider-line"></div>
+    <div class="method-divider-text">Method 02</div>
+    <div class="method-divider-line"></div>
+  </div>
+
+  <!-- METHOD 2 -->
+  <div class="section-block reveal">
+    <div class="method-badge">Method 02 — SmartScout</div>
+    <div class="block-title">Brand & distributor research via SmartScout</div>
+    <div class="block-body">
+      <p>Another strategy to find wholesale products, as information such as the seller’s name and the brands they offer can be used for manual sourcing to widen the scope.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Identifying non-private label sellers</div>
+          <div class="step-desc">Wholesalers should be cautious of private label sellers, as this can flag amazon’s account. Moreover, it is important to note the location of the seller you want to source from.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Review products each seller has offered</div>
+          <div class="step-desc">After all non-private label sellers were found, each brand along with the Amazon link, category, country, and the revenue they offer was extracted through automation.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Review</div>
+          <div class="step-desc">Reviewed and checked each amazon link scraped.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SmartScout Screenshot -->
+    <div class="screenshot-wrap" style="margin-top: 28px;">
+      <div class="screenshot-placeholder">
+        <img src="smartscout_data.png" alt="SmartScout results" onerror="this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--text3);font-family:var(--mono);font-size:12px;\'><span style=\'font-size:32px;\'>📸</span><span>Replace with screenshot-smartscout.png</span></div>'">
+      </div>
+      <div class="screenshot-caption">// SmartScout brand and distributor analysis results</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <div class="section-block reveal">
+    <div class="block-label">Skills demonstrated</div>
+    <div class="block-title">Technical and sourcing knowledge combined</div>
+    <div class="block-body">
+      <p>A combination of Amazon platform knowledge, Python scripting, and tools like SmartScout and Analyzer Tools to automate large-scale product research, narrowing it down to actionable leads for manual sourcing.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER NAV -->
+<div class="foot-nav">
+  <a class="foot-link" href="landed-cost-profit-roi-analysis.html">← Previous project</a>
+  <a class="foot-link" href="ecommerce-amazon.html">Back to portfolio →</a>
+</div>
+
+<footer>
+  <div class="footer-left">Built by <span>Christine</span> · Hosted on GitHub Pages</div>
+  <div class="footer-right">https://christine-a-d.github.io/amazon-analyst</div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  els.forEach(el => el.classList.add('animate'));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
